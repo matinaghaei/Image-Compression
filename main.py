@@ -10,7 +10,7 @@ def main():
         for j in range(image.shape[1]):
             colors[i * image.shape[1] + j] = image[i][j]
     termination_condition_threshold = 0.01
-    k_array = [2, 4, 16, 32, 64]
+    k_array = [2, 4, 8, 16, 32, 64]
     for k in k_array:
         k_means = KMeans(colors, k)
         k_means.start(termination_condition_threshold)
