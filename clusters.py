@@ -31,8 +31,12 @@ class Clusters:
                 if self.data.get_membership(i) == j:
                     s1 += self.data.get_data(i)
                     s2 += 1
-            max_change = max(max_change, Data.cal_distance(self.centers[j], s1 / s2))
-            self.centers[j] = s1 / s2
+            if s2 > 0:
+                new_coordinates = s1 / s2
+            else:
+                new_coordinates = random.choice(list(self.data.coordinates))
+            max_change = max(max_change, Data.cal_distance(self.centers[j], new_coordinates))
+            self.centers[j] = new_coordinates
         return max_change
 
     def error(self, c):
@@ -42,6 +46,8 @@ class Clusters:
             if self.data.get_membership(i) == c:
                 s += Data.cal_distance(self.centers[c], self.data.get_data(i))
                 n += 1
+        if n == 0:
+            return 0
         return s / n
 
     def total_error(self):
