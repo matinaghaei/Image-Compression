@@ -33,9 +33,10 @@ class Clusters:
                     s2 += 1
             if s2 > 0:
                 new_coordinates = s1 / s2
+                max_change = max(max_change, Data.cal_distance(self.centers[j], new_coordinates))
             else:
                 new_coordinates = random.choice(list(self.data.coordinates))
-            max_change = max(max_change, Data.cal_distance(self.centers[j], new_coordinates))
+                max_change = float('inf')
             self.centers[j] = new_coordinates
         return max_change
 
